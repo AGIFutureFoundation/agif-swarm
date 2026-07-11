@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agif-swarm"
+version = "0.1.0"
+description = "AGI Future Foundation PBC Corporate Swarm Orchestration Platform"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "AGI Future Foundation", email = "dev@agifoundation.org"}]
+keywords = ["ai", "agents", "orchestration", "swarm", "distributed-computing"]
+
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "sqlalchemy>=2.0",
+    "alembic>=1.12.0",
+    "redis>=5.0.0",
+    "httpx>=0.25.0",
+    "typer[all]>=0.9.0",
+    "rich>=13.0.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0",
+    "structlog>=23.0.0",
+    "prometheus-client>=0.18.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+    "types-redis>=4.6.0",
+    "types-pyyaml>=6.0",
+    "pytest-mock>=3.12.0",
+]
+
+[project.urls]
+Repository = "https://github.com/AGIFutureFoundation/agif-swarm"
+Documentation = "https://docs.agifoundation.org/swarm"
+Issues = "https://github.com/AGIFutureFoundation/agif-swarm/issues"
+
+[tool.setuptools]
+packages = ["agif_swarm"]
+
+[tool.black]
+line-length = 100
+target-version = ['py310', 'py311', 'py312']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "W", "I", "N", "UP"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers"
+testpaths = ["tests"]
+python_files = "test_*.py"
+asyncio_mode = "auto"
